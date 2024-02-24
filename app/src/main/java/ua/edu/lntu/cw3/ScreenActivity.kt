@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -103,7 +104,7 @@ fun progressListItem(
                 Text(
                     text = stringResource(process.days),
                     style = MaterialTheme.typography.displayMedium,
-                    fontSize = 25.sp
+                    fontSize = 25.sp,
                 )
 
 
@@ -113,9 +114,9 @@ fun progressListItem(
                 Text(
                     text = stringResource(id = process.nameres),
                     style = MaterialTheme.typography.displayMedium,
-                    fontSize = 28.sp,
+                    fontSize = 25.sp,
                     modifier = Modifier
-                        .padding(horizontal = 100.dp)
+                        .padding(horizontal = 50.dp)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
