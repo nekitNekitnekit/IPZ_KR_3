@@ -1,6 +1,13 @@
 package ua.edu.lntu.cw3
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +16,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import ua.edu.lntu.cw3.data.progress
 
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun progresslist(
     progress: List<progress>,
@@ -40,6 +50,36 @@ fun progresslist(
             targetState = true
         }
     }
+
+    AnimatedVisibility(
+        visibleState = visibleState,
+        enter = fadeIn(
+            animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy)
+        ),
+        exit = fadeOut(),
+        modifier = modifier
+    ) {
+        LazyColumn(contentPadding = contentPadding) {
+            itemsIndexed(progress) { index, process ->
+                progressListItem(
+                    process = process,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        // Animate each list item to slide in vertically
+                        .animateEnterExit(
+                            enter = slideInVertically(
+                                animationSpec = spring(
+                                    stiffness = Spring.StiffnessVeryLow,
+                                    dampingRatio = Spring.DampingRatioLowBouncy
+                                ),
+                                initialOffsetY = { it * (index + 1) }
+                            )
+                        )
+                )
+            }
+        }
+    }
+}
 
 
 @Composable
