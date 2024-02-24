@@ -12,10 +12,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -92,37 +94,31 @@ fun progressListItem(
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
         modifier = modifier
     ) {
-        Column (modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-        ){
-            Text(text = stringResource(process.days),
-                style = MaterialTheme.typography.displayMedium,
-                fontSize = 25.sp
-            )
-            Text(text = stringResource(id = process.nameres),
-                style = MaterialTheme.typography.displayMedium,
-                fontSize = 28.sp
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Box(modifier = Modifier
+        Row (
+            modifier = Modifier
                 .fillMaxSize()
-                .align(alignment = Alignment.CenterHorizontally)
-            ){
-                Image(painter = painterResource(id = process.imageRes),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier= Modifier
-                        .fillMaxSize()
-                        .align(alignment = Alignment.Center)
-                        .clip(RoundedCornerShape(18.dp))
-
+                .padding(16.dp)
+        ) {
+            Column {
+                Text(
+                    text = stringResource(process.days),
+                    style = MaterialTheme.typography.displayMedium,
+                    fontSize = 25.sp
                 )
-            }
-            Spacer(modifier = Modifier.height(10.dp))
 
+
+                Spacer(modifier = Modifier.height(10.dp))
+            }
+            Column {
+                Text(
+                    text = stringResource(id = process.nameres),
+                    style = MaterialTheme.typography.displayMedium,
+                    fontSize = 28.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 100.dp)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+            }
         }
     }
 }
