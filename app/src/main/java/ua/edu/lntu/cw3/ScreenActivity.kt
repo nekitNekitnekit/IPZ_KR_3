@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ua.edu.lntu.cw3.data.progress
 
 @Composable
 fun progressListItem(
@@ -45,6 +46,24 @@ fun progressListItem(
                 style = MaterialTheme.typography.displayMedium,
                 fontSize = 28.sp
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .align(alignment = Alignment.CenterHorizontally)
+            ){
+                Image(painter = painterResource(id = process.imageRes),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier= Modifier
+                        .fillMaxSize()
+                        .align(alignment = Alignment.Center)
+                        .clip(RoundedCornerShape(18.dp))
+
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
 
         }
     }
